@@ -1,0 +1,4 @@
+RobotFramework
+RobotFramework-SeleniumLibrary
+RobotFramework-Requests
+psycopg2
