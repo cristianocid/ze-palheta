@@ -27,22 +27,36 @@ Dado que acesso o formulário de cadastro de clientes
     Wait Until Element Is Visible    ${CUSTOMERS_FORM}     5  
     Click Element                    ${CUSTOMERS_FORM}    
 
-Quando faço a inclusão desse cliente:
+E que eu tenho o seguinte cliente:
     [Arguments]    ${name}    ${cpf}    ${address}    ${phone_number}   
-    
+
     remove_customer_by_cpf    ${cpf}
 
+    Set Test Variable    ${name}
+    Set Test Variable    ${cpf}
+    Set Test Variable    ${address}
+    Set Test Variable    ${phone_number}
+
+Mas esse cpf já existe no sistema
+    Insert Customer    ${name}    ${cpf}    ${address}    ${phone_number}
+
+Quando faço a inclusão desse cliente
     Register New Customer    ${name}    ${cpf}    ${address}    ${phone_number}    
 
 Então devo ver a notificação:
     [Arguments]    ${expect_notice}
     Wait Until Element Contains    ${TOASTER_SUCCESS}    ${expect_notice}    5
 
+Então devo ver a notificação de erro:
+    [Arguments]    ${expect_notice}
+    Wait Until Element Contains    ${TOASTER_ERROR}    ${expect_notice}    5
+
 Então devo ver mensagens informando que os campos do cadastro de clientes são Obrigatórios
-    Wait Until Page Contains    Nome é obrigatório        3
-    Wait Until Page Contains    CPF é obrigatório         3
-    Wait Until Page Contains    Endereço é obrigatório    3
-    Wait Until Page Contains    Telefone é obrigatório    3
+    Wait Until Element Contains     ${LABEL_NAME}        Nome é obrigatório        3
+    Wait Until Element Contains     ${LABEL_CPF}         CPF é obrigatório         3
+    Wait Until Element Contains     ${LABEL_ADDRESS}     Endereço é obrigatório    3
+    Wait Until Element Contains     ${LABEL_PHONE}       Telefone é obrigatório    3
+
 
 Então devo ver o texto:
     [Arguments]    ${expect_text}

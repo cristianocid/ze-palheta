@@ -10,14 +10,24 @@ Suite Teardown    Finish Session
 Novo cliente
 #Novos cliente
     Dado que acesso o formulário de cadastro de clientes
-    Quando faço a inclusão desse cliente:
+    E que eu tenho o seguinte cliente:
     ...        Bon jovi    00000001406    Rua dos Bugs, 1000    11999999999
+    Quando faço a inclusão desse cliente
     Então devo ver a notificação:    Cliente cadastrado com sucesso! 
+
+Cliente duplicado
+    Dado que acesso o formulário de cadastro de clientes
+    E que eu tenho o seguinte cliente:
+    ...        Bon jovi    00000001406    Rua dos Bugs, 1000    11999999999
+    Mas esse cpf já existe no sistema
+    Quando faço a inclusão desse cliente
+    Então devo ver a notificação de erro:    Este CPF já existe no sistema! 
 
 Campos Obrigatórios
     Dado que acesso o formulário de cadastro de clientes
-    Quando faço a inclusão desse cliente:
+    E que eu tenho o seguinte cliente:
     ...     ${EMPTY}     ${EMPTY}     ${EMPTY}     ${EMPTY}
+    Quando faço a inclusão desse cliente
     Então devo ver mensagens informando que os campos do cadastro de clientes são Obrigatórios
 
 Nome é obrigatório
@@ -49,19 +59,7 @@ Validação de Campos
     [Arguments]    ${nome}    ${cpf}    ${endereco}    ${telefone}    ${saida}
     
     Dado que acesso o formulário de cadastro de clientes
-    Quando faço a inclusão desse cliente:
-    ...     ${nome}     ${cpf}    ${endereco}    ${telefone}
+    E que eu tenho o seguinte cliente:
+        ...     ${nome}     ${cpf}    ${endereco}    ${telefone}
+    Quando faço a inclusão desse cliente
     Então devo ver o texto:    ${saida}
-
-
-
-
-# Cenários (Fazer um teste para cada)
-# Nome é obrigatório
-# CPF é obirgatório
-# Endereço é obrigatório
-# Telefone é obrigatório
-
-# Desafio do RoboCamp
-
-# Implementar os cenários de campos obrigatórios usando a técnica do Test Template
