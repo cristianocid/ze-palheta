@@ -40,6 +40,10 @@ Telefone é obrigatório
     [Template]    Validação de Campos
     Joao Junior    48034903094    Rua dos Bugs, 1000     ${EMPTY}   Telefone é obrigatório
 
+Telefone incorreto
+    [Template]    Validação de Campos
+    Joao Junior    48034903094    Rua dos Bugs, 1000    118999999    Telefone inválido
+
 *** Keywords ***
 Validação de Campos
     [Arguments]    ${nome}    ${cpf}    ${endereco}    ${telefone}    ${saida}
