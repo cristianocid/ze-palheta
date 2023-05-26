@@ -17,7 +17,7 @@ Devo ver a área logada
 Devo ver um toaster com a mensagem
     [Arguments]    ${expect_message} 
 
-    Wait Until Element Contains    ${TOASTER_ERROR}    ${expect_message}
+    Wait Until Element Contains    ${TOASTER_ERROR_LOGIN}    ${expect_message}
 
 
 # Keywords Customers

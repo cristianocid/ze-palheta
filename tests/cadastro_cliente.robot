@@ -9,6 +9,7 @@ Suite Teardown    Finish Session
 *** Test Cases ***
 Novo cliente
 #Novos cliente
+    [Tags]    smoke
     Dado que acesso o formulário de cadastro de clientes
     E que eu tenho o seguinte cliente:
     ...        Bon jovi    00000001406    Rua dos Bugs, 1000    11999999999
