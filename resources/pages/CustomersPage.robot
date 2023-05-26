@@ -21,3 +21,10 @@ Register New Customer
     Input Text    id:phone_number   ${phone_number}
 
     Click Element  xpath://button[text()='CADASTRAR']
+
+Register New Customer Equipo
+    [Arguments]    ${equipo_name}    ${daily_price}
+    Input Text    id:equipo-name    ${equipo_name}
+    Input Text    id:daily_price    ${daily_price}
+
+    Click Element  xpath://button[text()='CADASTRAR']

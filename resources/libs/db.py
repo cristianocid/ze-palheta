@@ -39,3 +39,17 @@ def remove_customer_by_cpf(cpf):
     query = "delete from public.customers where cpf = '{}';".format(cpf_formatado)
 
     execute_p(query)
+
+
+def Insert_equipo(name, daily_price):
+
+    query = "insert into public.equipos(name,daily_price) "\
+	"values ('{}', '{}');".format(name, daily_price)
+    
+    execute_p(query)
+
+
+def remove_equipos_by_name(name):
+        query = "delete from public.equipos where name = '{}';".format(name)
+        
+        execute_p(query)

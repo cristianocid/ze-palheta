@@ -63,3 +63,23 @@ Então devo ver o texto:
     
     Wait Until Page Contains    ${expect_text}    3
 
+# Teste equipamentos
+Dado que acesso o formulário de cadastro de equipamentos
+    Wait Until Element Is Visible    ${NAV_CUSTOMERS_EQUIPOS}      5
+    Click Element                    ${NAV_CUSTOMERS_EQUIPOS}  
+    Wait Until Element Is Visible    ${CUSTOMERS_FORM}             5  
+    Click Element                    ${CUSTOMERS_FORM}    
+
+E que eu tenho o seguinte equipamento:
+        [Arguments]    ${equipo_name}    ${daily_price}   
+
+    remove_equipos_by_name    ${equipo_name}
+
+    Set Test Variable    ${equipo_name}
+    Set Test Variable    ${daily_price}
+
+Quando faço a inclusão desse equipamento
+    Register New Customer Equipo    ${equipo_name}    ${daily_price}
+
+Mas esse equipo já existe no sistema
+    Insert Equipo    ${equipo_name}    ${daily_price}
