@@ -2,7 +2,7 @@
 Resource   ../resources/base.robot
 
 *** Keywords ***
-# Keywords Login
+## Keywords Login
 Acesso a página Login
     Go To    ${base_url} 
     
@@ -20,10 +20,9 @@ Devo ver um toaster com a mensagem
     Wait Until Element Contains    ${TOASTER_ERROR_LOGIN}    ${expect_message}
 
 
-# Keywords Customers
+## Keywords Save Customers
 Dado que acesso o formulário de cadastro de clientes
-    Wait Until Element Is Visible    ${NAV_CUSTOMERS}      5
-    Click Element                    ${NAV_CUSTOMERS}  
+    Go To Customers
     Wait Until Element Is Visible    ${CUSTOMERS_FORM}     5  
     Click Element                    ${CUSTOMERS_FORM}    
 
@@ -57,13 +56,19 @@ Então devo ver mensagens informando que os campos do cadastro de clientes são 
     Wait Until Element Contains     ${LABEL_ADDRESS}     Endereço é obrigatório    3
     Wait Until Element Contains     ${LABEL_PHONE}       Telefone é obrigatório    3
 
-
 Então devo ver o texto:
     [Arguments]    ${expect_text}
     
     Wait Until Page Contains    ${expect_text}    3
 
-# Teste equipamentos
+E esse cliente deve aparecer na lista
+    ${cpf_formatado}=    Format Cpf      ${cpf}
+    Go Back
+    Wait Until Element Is Visible    ${CUSTOMER_LIST}    3  
+    Table Should Contain             ${CUSTOMER_LIST}    ${cpf_formatado}   
+
+
+## Teste equipamentos
 Dado que acesso o formulário de cadastro de equipamentos
     Wait Until Element Is Visible    ${NAV_CUSTOMERS_EQUIPOS}      5
     Click Element                    ${NAV_CUSTOMERS_EQUIPOS}  
@@ -83,3 +88,26 @@ Quando faço a inclusão desse equipamento
 
 Mas esse equipo já existe no sistema
     Insert Equipo    ${equipo_name}    ${daily_price}
+
+
+## Remove Customer
+Dado que tenho um cliente indesejado:
+    [Arguments]        ${name}    ${cpf}    ${address}    ${phone_number}   
+    remove_customer_by_cpf    ${cpf}
+    
+    Insert Customer           ${name}    ${cpf}    ${address}    ${phone_number}
+
+    Set Test Variable         ${cpf}
+E acesso a lista de clientes
+    Go To Customers
+    
+Quando eu removo esse cliente
+    # Format Cpf é a KeyWord que representa o método no arquivo db.py
+    ${cpf_formatado} =    Format Cpf    ${cpf}
+    Set Test Variable          ${cpf_formatado}
+
+    Go To Customer Detatils    ${cpf_formatado}
+    Click Remove Customer
+
+E esse cliente não deve aparecer na lista
+    Wait Until Page Does Not Contain    ${cpf_formatado}   
