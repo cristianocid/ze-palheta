@@ -1,0 +1,28 @@
+{
+    "data": [
+        {
+            "name":"Alpha",
+            "cpf":"222.555.555-55",
+            "address":"Rua dos Bugs, 2600",
+            "phone_number":"(21) 9.8225-5555"  
+        },
+        {
+            "name":"Beta",
+            "cpf":"555.333.555-55",
+            "address":"Rua dos Bugs, 2700",
+            "phone_number":"(21) 9.8335-5555"
+        },
+        {
+            "name":"Delta",
+            "cpf":"555.555.444-55",
+            "address":"Rua dos Bugs, 2800",
+            "phone_number":"(21) 9.8445-5555"
+        },
+        {
+            "name":"Epsilon",
+            "cpf":"555.555.555-66",
+            "address":"Rua dos Bugs, 2900",
+            "phone_number":"(21) 9.8665-5555"
+        }
+    ]
+}
